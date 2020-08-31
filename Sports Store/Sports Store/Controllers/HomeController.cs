@@ -26,8 +26,11 @@ namespace SportsStore.Controllers
         public IActionResult UpdateProduct(long key)
         {
             ViewBag.Categories = catRepository.Categories;
-
-            return View(key == 0 ? new Product() : repository.GetProduct(key));
+            if (key == 0)
+            {
+                return View(new Product());
+            }
+            return View(repository.GetProduct(key));
         }
 
         [HttpPost]
